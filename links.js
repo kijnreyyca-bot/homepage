@@ -11,6 +11,17 @@ window.LINKS = [
     glyph: "✳"
   },
   {
+    title: "Pinterest Redirect Hub",
+    url: "https://kijnreyyca-bot.github.io/redirect_site/",
+    description: "Pinterest Redirect Hub",
+    category: "Tools",
+    tags: ["pinterest", "redirect"],
+    image: "",
+    color: "#31395e",
+    glow: "rgba(150,165,255,.6)",
+    glyph: "↗"
+  },
+  {
     title: "Frame - MP4 Player",
     url: "https://kijnreyyca-bot.github.io/Frame/",
     description: "Media Entertainment Video Site",
