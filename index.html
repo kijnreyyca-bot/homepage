@@ -7,8 +7,34 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* Password Gate Overlay */
+  #auth-overlay {
+    position: fixed; inset: 0; background: #10141c; z-index: 99999;
+    display: grid; place-items: center; padding: 24px; font-family: 'Manrope', sans-serif;
+  }
+  .auth-box {
+    width: min(380px, 100%); padding: 32px; border: 1px solid #ffffff20; border-radius: 20px; background: #141a24; text-align: center; color: #f2f5fa;
+  }
+  .auth-box input {
+    width: 100%; min-height: 48px; border-radius: 12px; font: inherit; padding: 0 14px; border: 1px solid #ffffff2a; background: #0d1119; color: inherit; margin-top: 16px; text-align: center; outline: none;
+  }
+  #auth-error { color: #ffb8b8; font-size: 13px; margin-top: 10px; min-height: 1.5em; }
+</style>
 </head>
 <body>
+
+<!-- Password Screen -->
+<div id="auth-overlay">
+  <div class="auth-box">
+    <div style="color: #a9c8ff; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;">Restricted Area</div>
+    <h2 style="margin: 8px 0 0;">Enter Key</h2>
+    <p style="margin: 4px 0 0; color: #aab4c4; font-size: 14px;">Access the command center.</p>
+    <input type="password" id="password-input" placeholder="Password..." autocomplete="off" autofocus>
+    <div id="auth-error"></div>
+  </div>
+</div>
+
 <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
 <header class="topbar"><a class="brand" href="#" aria-label="Elsewhere home"><span class="brand-mark">e</span><span>elsewhere<span class="brand-dot">.</span></span></a><div class="top-right"><span class="online"><i></i> A little corner of the internet</span><a class="share-link" href="#collections">Explore <span>↗</span></a></div></header>
 <main>
@@ -18,5 +44,24 @@
 <nav class="tabs" id="tabs" aria-label="Link categories"></nav><div class="filter-row"><div id="active-label">EVERYTHING, IN ONE PLACE</div><div class="filter-count" id="result-count"></div></div><div class="card-grid" id="card-grid"></div><div class="empty-state" id="empty-state" hidden><div class="empty-orb">⌕</div><h3>Nothing in this little corner</h3><p>Try another search or collection.</p></div></section>
 <section class="note"><span class="note-spark">✳</span><div><strong>Always open for a new find.</strong><p>A growing list of useful, beautiful, and unexpected things.</p></div><a href="#collections" aria-label="Back to the collections">↑</a></section>
 </main><footer><a class="brand footer-brand" href="#"><span class="brand-mark">e</span><span>elsewhere<span class="brand-dot">.</span></span></a><span>Made for the things worth keeping.</span><span class="footer-year"></span></footer>
+
+<script>
+  // Quick auth check
+  const overlay = document.querySelector("#auth-overlay");
+  const passInput = document.querySelector("#password-input");
+  const authError = document.querySelector("#auth-error");
+
+  passInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      if (passInput.value.trim() === "kijnreyyca") {
+        overlay.style.display = "none";
+      } else {
+        authError.textContent = "Incorrect key.";
+        passInput.value = "";
+      }
+    }
+  });
+</script>
+
 <script src="links.js"></script><script src="app.js"></script>
 </body></html>
