@@ -6,7 +6,7 @@
   const emptyEl = document.querySelector('#empty-state');
   const categories = ['All', ...new Set(items.map(item => item.category).filter(Boolean))];
   let activeCategory = 'All';
-  const safeURL = value => { try { const u = new URL(value); return ['http:', 'https:'].includes(u.protocol) ? u : null; } catch { return null; } };
+  const safeURL = value => { try { const u = new URL(value, window.location.href); return ['http:', 'https:'].includes(u.protocol) ? u : null; } catch { return null; } };
   const domainOf = url => { try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return url; } };
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   document.querySelector('#link-count').textContent = String(items.length).padStart(2, '0');
