@@ -16,7 +16,7 @@ window.LINKS = [
     description: "Pinterest Redirect Hub",
     category: "Tools",
     tags: ["pinterest", "redirect"],
-    image: "",
+    image: "https://i.pinimg.com/736x/e2/f5/ac/e2f5acb98e15bd7ca37e1fad71cb2dc7.jpg",
     color: "#31395e",
     glow: "rgba(150,165,255,.6)",
     glyph: "↗"
