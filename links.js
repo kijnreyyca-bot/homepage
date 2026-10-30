@@ -4,7 +4,7 @@ window.LINKS = [
     url: "https://kijnreyyca-bot.github.io/eaglerMC/",
     description: "Eaglercraft Version Launcher",
     category: "Gaming",
-    tags: ["about", "personal"],
+    tags: ["gaming", "entertainment"],
     image: "https://i.pinimg.com/736x/9b/ea/49/9bea4925478af8c34f659075e6cb2f5d.jpg",
     color: "#31395e",
     glow: "rgba(150,165,255,.6)",
@@ -28,6 +28,17 @@ window.LINKS = [
     category: "Entertainment",
     tags: ["media", "favorite"],
     image: "https://i.pinimg.com/736x/d3/4c/66/d34c6638522a36205e0acbc6cabeb778.jpg",
+    color: "#31395e",
+    glow: "rgba(150,165,255,.6)",
+    glyph: "✦"
+  },
+    {
+    title: "Spacebar Clicker",
+    url: "https://kijnreyyca-bot.github.io/space/",
+    description: "Ad-Free Spacebar clicker.",
+    category: "Entertainment",
+  tags: ["gaming", "entertainment"],
+    image: "https://i.pinimg.com/736x/71/b7/2c/71b72c2635f4985074f70b6bca6b9bad.jpg",
     color: "#31395e",
     glow: "rgba(150,165,255,.6)",
     glyph: "✦"
