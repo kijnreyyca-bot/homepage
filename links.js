@@ -33,9 +33,9 @@ window.LINKS = [
     glyph: "✦"
   },
     {
-    title: "Spacebar Clicker",
-    url: "https://kijnreyyca-bot.github.io/space/",
-    description: "Ad-Free Spacebar clicker.",
+    title: "Idle-Game Clickers",
+    url: "https://kijnreyyca-bot.github.io/Clickers/",
+    description: "Idle-Game Clicker Selector",
     category: "Entertainment",
   tags: ["gaming", "entertainment"],
     image: "https://i.pinimg.com/736x/71/b7/2c/71b72c2635f4985074f70b6bca6b9bad.jpg",
