@@ -3,121 +3,102 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10141c"><meta name="description" content="A personal collection of useful places on the web.">
-<title>Elsewhere — Your curated corner of the web</title>
+<title>Homepage — Your curated corner of the web</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-  /* Hacker Terminal Overlay */
+  /* Optional sign-in panel. This is a convenience gate, not secure authentication. */
   #auth-overlay {
-    position: fixed; inset: 0; background: #05080c; z-index: 99999;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    padding: 20px; font-family: 'Fira Code', monospace; color: #00ff66;
+    position: fixed; inset: 0; background: rgba(5, 8, 12, .72); z-index: 99999;
+    display: flex; justify-content: center; align-items: center;
+    padding: 20px; color: var(--ink); backdrop-filter: blur(12px);
   }
-  .terminal-box {
-    width: min(600px, 100%);
-    background: #090d14; border: 1px solid #00ff6640; border-radius: 12px;
-    box-shadow: 0 0 30px rgba(0, 255, 102, 0.15); overflow: hidden;
+  #auth-overlay[hidden] { display: none; }
+  .auth-box {
+    width: min(400px, 100%); padding: 26px;
+    background: #151a23; border: 1px solid var(--line); border-radius: 16px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, .45);
   }
-  .terminal-header {
-    background: #101722; padding: 10px 16px; border-bottom: 1px solid #00ff6620;
-    display: flex; align-items: center; gap: 8px; font-size: 12px; color: #739680;
+  .auth-heading { display: flex; justify-content: space-between; align-items: center; }
+  .auth-heading h2 { margin: 0; font: 600 21px var(--display); }
+  .auth-close {
+    border: 1px solid var(--line); border-radius: 50%; width: 32px; height: 32px;
+    color: var(--ink); background: transparent; font-size: 18px; cursor: pointer;
   }
-  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-  .dot-red { background: #ff5f56; } .dot-yellow { background: #ffbd2e; } .dot-green { background: #27c93f; }
-  
-  .terminal-body {
-    padding: 20px; max-height: 320px; overflow-y: auto; font-size: 13px; line-height: 1.6;
+  .auth-copy { margin: 9px 0 20px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+  .auth-box label { display: block; margin-bottom: 8px; font-size: 11px; color: #c1c4ce; }
+  .auth-box input {
+    width: 100%; padding: 12px 13px; border: 1px solid var(--line); border-radius: 9px;
+    color: var(--ink); background: rgba(255,255,255,.04); font: 13px var(--font); outline: none;
   }
-  .terminal-log { color: #528062; margin-bottom: 4px; word-break: break-all; }
-  .terminal-log span { color: #00ff66; }
-  
-  .terminal-input-row {
-    display: flex; align-items: center; gap: 8px; margin-top: 12px; color: #00ff66; font-weight: bold;
+  .auth-box input:focus { border-color: var(--accent); }
+  .auth-submit {
+    width: 100%; margin-top: 12px; padding: 12px; border: 0; border-radius: 9px;
+    color: #172015; background: var(--accent); font: 700 12px var(--font); cursor: pointer;
   }
-  .terminal-input-row input {
-    background: transparent; border: none; outline: none; color: #00ff66;
-    font-family: 'Fira Code', monospace; font-size: 14px; width: 100%;
+  .auth-trigger {
+    padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px;
+    color: var(--ink); background: transparent; font: 500 12px var(--font); cursor: pointer;
   }
-  #auth-error { color: #ff5555; font-size: 12px; margin-top: 8px; min-height: 1.2em; }
+  .auth-trigger:hover, .auth-close:hover { background: var(--glass); }
+  #auth-error { color: #ff8888; font-size: 11px; margin: 10px 0 0; min-height: 1.2em; }
+  @media (max-width: 740px) { .auth-trigger { padding: 8px 11px; } }
 </style>
 </head>
 <body>
 
-<!-- Hacker Terminal Overlay -->
-<div id="auth-overlay">
-  <div class="terminal-box">
-    <div class="terminal-header">
-      <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
-      <span style="margin-left: 8px;">root@unblocker-hub:~</span>
-    </div>
-    <div class="terminal-body" id="terminal-body">
-      <div class="terminal-log">[SYSTEM] Initializing bypass protocols...</div>
-      <div class="terminal-log">[FETCH] github.com/kijnreyyca-bot/redirect_site <span>(commit: a7f89d)</span></div>
-      <div class="terminal-log">[LOAD] inject unblocker.js... <span>SUCCESS</span></div>
-      <div class="terminal-log">[NET] Domain rotation ready (ru/fr/de/ch/uk subdomains active)</div>
-      <div class="terminal-log">[AUTH] Security layer engaged. Encryption: AES-256</div>
-    </div>
-    <div style="padding: 0 20px 20px 20px;">
-      <div class="terminal-input-row">
-        <span>&gt; enter_key:</span>
-        <input type="password" id="password-input" autocomplete="off" autofocus>
-      </div>
-      <div id="auth-error"></div>
-    </div>
-  </div>
+<div id="auth-overlay" hidden>
+  <form class="auth-box" id="auth-form" aria-labelledby="auth-title">
+    <div class="auth-heading"><h2 id="auth-title">Sign in</h2><button class="auth-close" id="auth-close" type="button" aria-label="Close sign-in">×</button></div>
+    <p class="auth-copy">Enter the password, then choose Automatically Logon.</p>
+    <label for="password-input">Password</label>
+    <input type="password" id="password-input" autocomplete="current-password" required>
+    <button class="auth-submit" type="submit">Automatically Logon</button>
+    <p id="auth-error" role="status" aria-live="polite"></p>
+  </form>
 </div>
 
 <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
-<header class="topbar"><a class="brand" href="#" aria-label="Elsewhere home"><span class="brand-mark">e</span><span>elsewhere<span class="brand-dot">.</span></span></a><div class="top-right"><span class="online"><i></i> A little corner of the internet</span><a class="share-link" href="#collections">Explore <span>↗</span></a></div></header>
+<header class="topbar"><a class="brand" href="#" aria-label="Homepage"><span class="brand-mark">H</span><span>Homepage<span class="brand-dot">.</span></span></a><div class="top-right"><span class="online"><i></i> A little corner of the internet</span><a class="share-link" href="#collections">Explore <span>↗</span></a><button class="auth-trigger" id="auth-open" type="button">Sign in</button></div></header>
 <main>
 <section class="hero"><div class="eyebrow"><span class="eyebrow-line"></span> A PERSONAL INDEX <span class="eyebrow-line"></span></div><h1>Good things,<br><span>worth sharing.</span></h1><p class="intro">A hand-picked collection of places I love, projects I’ve made, and things worth a closer look.</p><a class="scroll-cue" href="#collections"><span class="scroll-icon">↓</span> Take a look around</a>
 <div class="stats"><div><strong id="link-count">00</strong><span>curated links</span></div><div class="stat-rule"></div><div><strong id="category-count">00</strong><span>collections</span></div></div></section>
 <section class="collection-section" id="collections"><div class="section-heading"><div><div class="section-kicker">THE COLLECTION</div><h2>Places to <span>explore</span></h2></div><div class="search-wrap"><span class="search-icon">⌕</span><input type="search" id="search" placeholder="Find something…" aria-label="Search links"><kbd>/</kbd></div></div>
 <nav class="tabs" id="tabs" aria-label="Link categories"></nav><div class="filter-row"><div id="active-label">EVERYTHING, IN ONE PLACE</div><div class="filter-count" id="result-count"></div></div><div class="card-grid" id="card-grid"></div><div class="empty-state" id="empty-state" hidden><div class="empty-orb">⌕</div><h3>Nothing in this little corner</h3><p>Try another search or collection.</p></div></section>
 <section class="note"><span class="note-spark">✳</span><div><strong>Always open for a new find.</strong><p>A growing list of useful, beautiful, and unexpected things.</p></div><a href="#collections" aria-label="Back to the collections">↑</a></section>
-</main><footer><a class="brand footer-brand" href="#"><span class="brand-mark">e</span><span>elsewhere<span class="brand-dot">.</span></span></a><span>Made for the things worth keeping.</span><span class="footer-year"></span></footer>
+</main><footer><a class="brand footer-brand" href="#"><span class="brand-mark">H</span><span>Homepage<span class="brand-dot">.</span></span></a><span>Made for the things worth keeping.</span><span class="footer-year"></span></footer>
 
 <script>
-  // Terminal Logic & Password Verification
+  // Optional client-side sign-in. GitHub Pages cannot keep a password secret.
   const overlay = document.querySelector("#auth-overlay");
   const passInput = document.querySelector("#password-input");
   const authError = document.querySelector("#auth-error");
-  const terminalBody = document.querySelector("#terminal-body");
-
-  // Simulated live matrix logs on keypress
-  const extraLogs = [
-    "[NET] Checking school firewall status... BYPASSED",
-    "[GIT] Syncing origin/main unblocker.js (github.com)",
-    "[PROXY] Spoofing user-agent parameters...",
-    "[STATUS] Ready for operator auth key..."
-  ];
-
-  let logIndex = 0;
-  passInput.addEventListener("input", () => {
-    if (logIndex < extraLogs.length) {
-      const log = document.createElement("div");
-      log.className = "terminal-log";
-      log.innerHTML = extraLogs[logIndex];
-      terminalBody.appendChild(log);
-      terminalBody.scrollTop = terminalBody.scrollHeight;
-      logIndex++;
-    }
+  const authForm = document.querySelector("#auth-form");
+  document.querySelector("#auth-open").addEventListener("click", () => {
+    overlay.hidden = false;
+    passInput.focus();
   });
-
-  passInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      if (passInput.value.trim() === "kijnreyyca") {
-        authError.style.color = "#00ff66";
-        authError.textContent = "[ACCESS GRANTED] Decrypting dashboard...";
-        setTimeout(() => {
-          overlay.style.display = "none";
-        }, 600);
-      } else {
-        authError.style.color = "#ff5555";
-        authError.textContent = "[ACCESS DENIED] Invalid key signature.";
-        passInput.value = "";
-      }
+  document.querySelector("#auth-close").addEventListener("click", () => {
+    overlay.hidden = true;
+    authError.textContent = "";
+  });
+  overlay.addEventListener("click", (event) => {
+    if (event.target === overlay) overlay.hidden = true;
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !overlay.hidden) overlay.hidden = true;
+  });
+  authForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (passInput.value.trim() === "kijnreyyca") {
+      authError.style.color = "var(--accent)";
+      authError.textContent = "Signed in.";
+      window.setTimeout(() => { overlay.hidden = true; }, 300);
+    } else {
+      authError.style.color = "#ff8888";
+      authError.textContent = "That password didn’t match. Try again.";
+      passInput.select();
     }
   });
 </script>
