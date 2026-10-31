@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10141c"><meta name="description" content="A personal collection of useful places on the web.">
-<title>Homepage — Your curated corner of the web</title>
+<title>Homepage</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-  /* Optional sign-in panel. This is a convenience gate, not secure authentication. */
+  /* Mandatory sign-in panel */
   #auth-overlay {
-    position: fixed; inset: 0; background: rgba(5, 8, 12, .72); z-index: 99999;
+    position: fixed; inset: 0; background: rgba(5, 8, 12, .88); z-index: 99999;
     display: flex; justify-content: center; align-items: center;
     padding: 20px; color: var(--ink); backdrop-filter: blur(12px);
   }
@@ -22,10 +22,6 @@
   }
   .auth-heading { display: flex; justify-content: space-between; align-items: center; }
   .auth-heading h2 { margin: 0; font: 600 21px var(--display); }
-  .auth-close {
-    border: 1px solid var(--line); border-radius: 50%; width: 32px; height: 32px;
-    color: var(--ink); background: transparent; font-size: 18px; cursor: pointer;
-  }
   .auth-copy { margin: 9px 0 20px; color: var(--muted); font-size: 12px; line-height: 1.6; }
   .auth-box label { display: block; margin-bottom: 8px; font-size: 11px; color: #c1c4ce; }
   .auth-box input {
@@ -41,7 +37,7 @@
     padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px;
     color: var(--ink); background: transparent; font: 500 12px var(--font); cursor: pointer;
   }
-  .auth-trigger:hover, .auth-close:hover { background: var(--glass); }
+  .auth-trigger:hover { background: var(--glass); }
   #auth-error { color: #ff8888; font-size: 11px; margin: 10px 0 0; min-height: 1.2em; }
   @media (max-width: 740px) { .auth-trigger { padding: 8px 11px; } }
 </style>
@@ -50,7 +46,7 @@
 
 <div id="auth-overlay" hidden>
   <form class="auth-box" id="auth-form" aria-labelledby="auth-title">
-    <div class="auth-heading"><h2 id="auth-title">Sign in</h2><button class="auth-close" id="auth-close" type="button" aria-label="Close sign-in">×</button></div>
+    <div class="auth-heading"><h2 id="auth-title">Sign in</h2></div>
     <p class="auth-copy">Enter the password, then choose Automatically Logon.</p>
     <label for="password-input">Password</label>
     <input type="password" id="password-input" autocomplete="current-password" required>
@@ -62,38 +58,42 @@
 <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
 <header class="topbar"><a class="brand" href="#" aria-label="Homepage"><span class="brand-mark">H</span><span>Homepage<span class="brand-dot">.</span></span></a><div class="top-right"><span class="online"><i></i> A little corner of the internet</span><a class="share-link" href="#collections">Explore <span>↗</span></a><button class="auth-trigger" id="auth-open" type="button">Sign in</button></div></header>
 <main>
-<section class="hero"><div class="eyebrow"><span class="eyebrow-line"></span> A PERSONAL INDEX <span class="eyebrow-line"></span></div><h1>Good things,<br><span>worth sharing.</span></h1><p class="intro">A hand-picked collection of places I love, projects I’ve made, and things worth a closer look.</p><a class="scroll-cue" href="#collections"><span class="scroll-icon">↓</span> Take a look around</a>
+<section class="hero"><div class="eyebrow"><span class="eyebrow-line"></span> A personal collection <span class="eyebrow-line"></span></div><h1>Good things,<br><span>worth sharing.</span></h1><p class="intro">A collection of game's.</p><a class="scroll-cue" href="#collections"><span class="scroll-icon">↓</span> Take a look around</a>
 <div class="stats"><div><strong id="link-count">00</strong><span>curated links</span></div><div class="stat-rule"></div><div><strong id="category-count">00</strong><span>collections</span></div></div></section>
-<section class="collection-section" id="collections"><div class="section-heading"><div><div class="section-kicker">THE COLLECTION</div><h2>Places to <span>explore</span></h2></div><div class="search-wrap"><span class="search-icon">⌕</span><input type="search" id="search" placeholder="Find something…" aria-label="Search links"><kbd>/</kbd></div></div>
-<nav class="tabs" id="tabs" aria-label="Link categories"></nav><div class="filter-row"><div id="active-label">EVERYTHING, IN ONE PLACE</div><div class="filter-count" id="result-count"></div></div><div class="card-grid" id="card-grid"></div><div class="empty-state" id="empty-state" hidden><div class="empty-orb">⌕</div><h3>Nothing in this little corner</h3><p>Try another search or collection.</p></div></section>
-<section class="note"><span class="note-spark">✳</span><div><strong>Always open for a new find.</strong><p>A growing list of useful, beautiful, and unexpected things.</p></div><a href="#collections" aria-label="Back to the collections">↑</a></section>
+<section class="collection-section" id="collections"><div class="section-heading"><div><div class="section-kicker">My collection</div><h2>Places to <span>explore</span></h2></div><div class="search-wrap"><span class="search-icon">⌕</span><input type="search" id="search" placeholder="Find something…" aria-label="Search links"><kbd>/</kbd></div></div>
+<nav class="tabs" id="tabs" aria-label="Link categories"></nav><div class="filter-row"><div id="active-label">Everything in 1 place/</div><div class="filter-count" id="result-count"></div></div><div class="card-grid" id="card-grid"></div><div class="empty-state" id="empty-state" hidden><div class="empty-orb">⌕</div><h3>Nothing in this little corner</h3><p>Try another search or collection.</p></div></section>
+<section class="note"><span class="note-spark">✳</span><div><strong>Always open for a new find.</strong><p>Growing list of websites, games, or directory sites..</p></div><a href="#collections" aria-label="Back to the collections">↑</a></section>
 </main><footer><a class="brand footer-brand" href="#"><span class="brand-mark">H</span><span>Homepage<span class="brand-dot">.</span></span></a><span>Made for the things worth keeping.</span><span class="footer-year"></span></footer>
 
 <script>
-  // Optional client-side sign-in. GitHub Pages cannot keep a password secret.
   const overlay = document.querySelector("#auth-overlay");
   const passInput = document.querySelector("#password-input");
   const authError = document.querySelector("#auth-error");
   const authForm = document.querySelector("#auth-form");
+
+  // Check if the user already logged in during this browser session
+  if (sessionStorage.getItem("authenticated") === "true") {
+    overlay.hidden = true;
+  } else {
+    overlay.hidden = false;
+    passInput.focus();
+  }
+
+  // Allow the top-right "Sign in" button to re-trigger the lock screen if needed
   document.querySelector("#auth-open").addEventListener("click", () => {
     overlay.hidden = false;
     passInput.focus();
   });
-  document.querySelector("#auth-close").addEventListener("click", () => {
-    overlay.hidden = true;
-    authError.textContent = "";
-  });
-  overlay.addEventListener("click", (event) => {
-    if (event.target === overlay) overlay.hidden = true;
-  });
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && !overlay.hidden) overlay.hidden = true;
-  });
+
   authForm.addEventListener("submit", (event) => {
     event.preventDefault();
     if (passInput.value.trim() === "kijnreyyca") {
       authError.style.color = "var(--accent)";
       authError.textContent = "Signed in.";
+      
+      // Save authentication state for the current session
+      sessionStorage.setItem("authenticated", "true");
+
       window.setTimeout(() => { overlay.hidden = true; }, 300);
     } else {
       authError.style.color = "#ff8888";
