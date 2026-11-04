@@ -33,7 +33,6 @@ Homepage is a small, fast, personal hub that gathers every game and creation in 
 - 📱 **Responsive:** works on desktop, tablet, and phone.
 - 🖼️ **Card art:** each card gets a colored header, or a custom image when one is set.
 - 🔐 **Sign-in screen:** a lightweight password gate on load (see the [note](#-a-note-on-the-sign-in-screen)).
-- ⚡ **Zero build:** edit a file, push, and it's live.
 
 ## 🎨 Themes
 
