@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="favicon.png" alt="Homepage logo" height="64">
+<img src="favicon.png" alt="Homepage logo" height="128">
 
 # Homepage.
 
@@ -57,64 +57,6 @@ Use the **Compact / Comfy** toggle above the cards.
 
 On phones, both modes show 2 cards per row.
 
-## 📁 Project structure
-
-```text
-.
-├── index.html                    # Page skeleton, sign-in screen, theme and layout switchers
-├── styles.css                    # All styling, themes, and layout modes
-├── links.js                      # The data: your links, categories, and descriptions
-├── app.js                        # Builds the tabs and cards, runs search and counters
-├── favicon.png                   # Browser tab icon and the on-page logo
-├── SF-Pro-Rounded-Semibold.otf   # Display font used for headings
-└── README.md                     # You are here
-```
-
-## 🖥️ Run it locally
-
-No install needed. You can open `index.html` directly in a browser, or serve the folder for a more realistic test:
-
-```bash
-# from the project folder
-python3 -m http.server 8000
-# then visit http://localhost:8000
-```
-
-## 🚀 Deploy on GitHub Pages
-
-1. Push the project to a GitHub repository.
-2. Go to **Settings → Pages**.
-3. Under **Build and deployment**, choose **Deploy from a branch**, then select your main branch and the `/ (root)` folder.
-4. Save. In a minute or two the site is live. Every push to that branch redeploys it automatically.
-
-`index.html` must sit at the root of the published folder so it loads as the homepage.
-
-## 🛠️ Customize
-
-**Add or edit links:** open `links.js` and change the entries (URLs, titles, descriptions, categories). The counters and tabs update on their own.
-
-**Tweak the look:** colors live in CSS variables at the top of `styles.css`. Each theme overrides them in the `THEMES` section near the bottom, so adding a fifth theme is mostly a new block of variables plus one more button in the theme menu in `index.html`.
-
-| Variable | What it controls |
-| --- | --- |
-| `--bg` | Page background |
-| `--ink`, `--ink-2` | Main and strong secondary text |
-| `--muted`, `--faint` | Dimmer text |
-| `--accent` | Highlights, active tabs, links on hover |
-| `--card`, `--card-hover` | Card backgrounds |
-| `--fx` | Overlay channel (white on dark themes, black on light) |
-
-**Change the logo:** replace `favicon.png`. It is used for both the browser tab and the logo on the page, and it is drawn pixel-crisp, so small pixel art looks best.
-
-## 🔐 A note on the sign-in screen
-
-The sign-in screen is a convenience, not real security. GitHub Pages only serves static files, so the password check runs in the visitor's browser and the password is visible in the page source. Anyone who views the source can see it, and `links.js` is publicly downloadable regardless. If you ever need genuine privacy, use something like [StatiCrypt](https://github.com/robinmoisson/staticrypt) or put the site behind real authentication.
-
-## 🧰 Built with
-
-- Plain **HTML, CSS, and JavaScript**
-- Fonts: **DM Sans**, **Manrope**, and **Fira Code** from Google Fonts, plus **SF Pro Rounded** for headings
-- **GitHub Pages** for hosting
 
 ## 👤 Author
 
