@@ -1,8 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark" data-density="compact">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#10141c"><meta name="description" content="A personal collection of useful places on the web.">
+<meta name="theme-color" id="theme-color" content="#1a1a1d">
+<script>try{var t=localStorage.getItem("theme");if(/^(void|dark|white|blue)$/.test(t))document.documentElement.dataset.theme=t;var d=localStorage.getItem("density");if(d==="compact"||d==="comfy")document.documentElement.dataset.density=d}catch(e){}</script><meta name="description" content="A personal collection of useful places on the web.">
 <title>Homepage</title>
 <!-- Browser Tab Icon (Favicon) --><link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,35 +12,35 @@
 <style>
   /* Mandatory sign-in panel */
   #auth-overlay {
-    position: fixed; inset: 0; background: rgba(5, 8, 12, .88); z-index: 99999;
+    position: fixed; inset: 0; background: var(--overlay); z-index: 99999;
     display: flex; justify-content: center; align-items: center;
     padding: 20px; color: var(--ink); backdrop-filter: blur(12px);
   }
   #auth-overlay[hidden] { display: none; }
   .auth-box {
     width: min(400px, 100%); padding: 26px;
-    background: #151a23; border: 1px solid var(--line); border-radius: 16px;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
     box-shadow: 0 24px 80px rgba(0, 0, 0, .45);
   }
   .auth-heading { display: flex; justify-content: space-between; align-items: center; }
   .auth-heading h2 { margin: 0; font: 600 21px var(--display); }
   .auth-copy { margin: 9px 0 20px; color: var(--muted); font-size: 12px; line-height: 1.6; }
-  .auth-box label { display: block; margin-bottom: 8px; font-size: 11px; color: #c1c4ce; }
+  .auth-box label { display: block; margin-bottom: 8px; font-size: 11px; color: var(--ink-2); }
   .auth-box input {
     width: 100%; padding: 12px 13px; border: 1px solid var(--line); border-radius: 9px;
-    color: var(--ink); background: rgba(255,255,255,.04); font: 13px var(--font); outline: none;
+    color: var(--ink); background: rgba(var(--fx),.04); font: 13px var(--font); outline: none;
   }
   .auth-box input:focus { border-color: var(--accent); }
   .auth-submit {
     width: 100%; margin-top: 12px; padding: 12px; border: 0; border-radius: 9px;
-    color: #172015; background: var(--accent); font: 700 12px var(--font); cursor: pointer;
+    color: var(--on-accent); background: var(--accent); font: 700 12px var(--font); cursor: pointer;
   }
   .auth-trigger {
     padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px;
     color: var(--ink); background: transparent; font: 500 12px var(--font); cursor: pointer;
   }
   .auth-trigger:hover { background: var(--glass); }
-  #auth-error { color: #ff8888; font-size: 11px; margin: 10px 0 0; min-height: 1.2em; }
+  #auth-error { color: var(--danger); font-size: 11px; margin: 10px 0 0; min-height: 1.2em; }
   @media (max-width: 740px) { .auth-trigger { padding: 8px 11px; } }
 </style>
 </head>
@@ -48,23 +49,29 @@
 <div id="auth-overlay" hidden>
   <form class="auth-box" id="auth-form" aria-labelledby="auth-title">
     <div class="auth-heading"><h2 id="auth-title">Sign in</h2></div>
-    <p class="auth-copy">Enter the password, then choose Automatically Logon.</p>
+    <p class="auth-copy">Enter the password to continue.</p>
     <label for="password-input">Password</label>
     <input type="password" id="password-input" autocomplete="current-password" required>
-    <button class="auth-submit" type="submit">Automatically Logon</button>
+    <button class="auth-submit" type="submit">Sign in</button>
     <p id="auth-error" role="status" aria-live="polite"></p>
   </form>
 </div>
 
 <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
-<header class="topbar"><a class="brand" href="#" aria-label="Homepage"><span class="brand-mark">H</span><span>Homepage<span class="brand-dot">.</span></span></a><div class="top-right"><span class="online"><i></i> A little corner of the internet</span><a class="share-link" href="#collections">Explore <span>↗</span></a><button class="auth-trigger" id="auth-open" type="button">Sign in</button></div></header>
+<header class="topbar"><a class="brand" href="#" aria-label="Homepage"><span class="brand-mark"><img src="favicon.png" alt=""></span><span>Homepage<span class="brand-dot">.</span></span></a><div class="top-right"><span class="online"><i></i> A little corner of the internet</span><a class="share-link" href="#collections">Explore <span>↗</span></a><div class="theme-picker"><button class="auth-trigger theme-btn" id="theme-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="theme-menu"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg><span class="theme-label">Theme</span></button>
+<div class="theme-menu" id="theme-menu" role="menu" aria-label="Choose a theme" hidden>
+<button class="theme-opt" role="menuitemradio" data-t="void" aria-checked="false"><span class="swatch sw-void"></span>The Void<span class="check">✓</span></button>
+<button class="theme-opt" role="menuitemradio" data-t="dark" aria-checked="true"><span class="swatch sw-dark"></span>Dark<span class="check">✓</span></button>
+<button class="theme-opt" role="menuitemradio" data-t="white" aria-checked="false"><span class="swatch sw-white"></span>White<span class="check">✓</span></button>
+<button class="theme-opt" role="menuitemradio" data-t="blue" aria-checked="false"><span class="swatch sw-blue"></span>Dark Blue<span class="check">✓</span></button>
+</div></div><button class="auth-trigger" id="auth-open" type="button">Sign in</button></div></header>
 <main>
-<section class="hero"><div class="eyebrow"><span class="eyebrow-line"></span> A personal collection <span class="eyebrow-line"></span></div><h1>Good things,<br><span>worth sharing.</span></h1><p class="intro">A collection of game's.</p><a class="scroll-cue" href="#collections"><span class="scroll-icon">↓</span> Take a look around</a>
+<section class="hero"><div class="eyebrow"><span class="eyebrow-line"></span> A personal collection <span class="eyebrow-line"></span></div><h1>Good things,<br><span>worth sharing.</span></h1><p class="intro">A collection of games.</p><a class="scroll-cue" href="#collections"><span class="scroll-icon">↓</span> Take a look around</a>
 <div class="stats"><div><strong id="link-count">00</strong><span>curated links</span></div><div class="stat-rule"></div><div><strong id="category-count">00</strong><span>collections</span></div></div></section>
 <section class="collection-section" id="collections"><div class="section-heading"><div><div class="section-kicker">My collection</div><h2>Places to <span>explore</span></h2></div><div class="search-wrap"><span class="search-icon">⌕</span><input type="search" id="search" placeholder="Find something…" aria-label="Search links"><kbd>/</kbd></div></div>
-<nav class="tabs" id="tabs" aria-label="Link categories"></nav><div class="filter-row"><div id="active-label">Everything in 1 place/</div><div class="filter-count" id="result-count"></div></div><div class="card-grid" id="card-grid"></div><div class="empty-state" id="empty-state" hidden><div class="empty-orb">⌕</div><h3>Nothing in this little corner</h3><p>Try another search or collection.</p></div></section>
-<section class="note"><span class="note-spark">✳</span><div><strong>Always open for a new find.</strong><p>Growing list of websites, games, or directory sites..</p></div><a href="#collections" aria-label="Back to the collections">↑</a></section>
-</main><footer><a class="brand footer-brand" href="#"><span class="brand-mark">H</span><span>Homepage<span class="brand-dot">.</span></span></a><span>Made for the things worth keeping.</span><span class="footer-year"></span></footer>
+<nav class="tabs" id="tabs" aria-label="Link categories"></nav><div class="filter-row"><div id="active-label">Everything in one place</div><div class="density" role="radiogroup" aria-label="Card density"><button type="button" role="radio" data-d="compact" aria-checked="true">Compact</button><button type="button" role="radio" data-d="comfy" aria-checked="false">Comfy</button></div><div class="filter-count" id="result-count"></div></div><div class="card-grid" id="card-grid"></div><div class="empty-state" id="empty-state" hidden><div class="empty-orb">⌕</div><h3>Nothing in this little corner</h3><p>Try another search or collection.</p></div></section>
+<section class="note"><span class="note-spark">✳</span><div><strong>Always open to new finds.</strong><p>A growing list of websites, games, and directory sites.</p></div><a href="#collections" aria-label="Back to the collections">↑</a></section>
+</main><footer><a class="brand footer-brand" href="#"><span class="brand-mark"><img src="favicon.png" alt=""></span><span>Homepage<span class="brand-dot">.</span></span></a><span>Made for the things worth keeping.</span><span class="footer-year"></span></footer>
 
 <script>
   const overlay = document.querySelector("#auth-overlay");
@@ -97,12 +104,60 @@
 
       window.setTimeout(() => { overlay.hidden = true; }, 300);
     } else {
-      authError.style.color = "#ff8888";
-      authError.textContent = "That password didn’t match. Try again.";
+      authError.style.color = "var(--danger)";
+      authError.textContent = "That password didn’t match. Please try again.";
       passInput.select();
     }
   });
 </script>
 
+
+<script>
+  // Theme switcher (choice is remembered in this browser)
+  (function () {
+    var COLORS = { void: "#000000", dark: "#1a1a1d", white: "#eceef1", blue: "#0a1628" };
+    var root = document.documentElement;
+    var btn = document.querySelector("#theme-btn");
+    var menu = document.querySelector("#theme-menu");
+    var meta = document.querySelector("#theme-color");
+    var opts = menu.querySelectorAll(".theme-opt");
+
+    function apply(name, save) {
+      if (!COLORS[name]) name = "dark";
+      root.dataset.theme = name;
+      meta.setAttribute("content", COLORS[name]);
+      opts.forEach(function (o) { o.setAttribute("aria-checked", String(o.dataset.t === name)); });
+      if (save) { try { localStorage.setItem("theme", name); } catch (e) {} }
+    }
+    function toggle(open) {
+      menu.hidden = !open;
+      btn.setAttribute("aria-expanded", String(open));
+    }
+
+    apply(root.dataset.theme, false);
+    btn.addEventListener("click", function (e) { e.stopPropagation(); toggle(menu.hidden); });
+    opts.forEach(function (o) {
+      o.addEventListener("click", function () { apply(o.dataset.t, true); toggle(false); });
+    });
+    document.addEventListener("click", function (e) { if (!menu.hidden && !menu.contains(e.target)) toggle(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !menu.hidden) { toggle(false); btn.focus(); } });
+  })();
+</script>
+
+<script>
+  // Density switcher: compact (4 per row) or comfy (3 per row); remembered in this browser
+  (function () {
+    var root = document.documentElement;
+    var btns = document.querySelectorAll(".density button");
+    function apply(mode, save) {
+      if (mode !== "comfy") mode = "compact";
+      root.dataset.density = mode;
+      btns.forEach(function (b) { b.setAttribute("aria-checked", String(b.dataset.d === mode)); });
+      if (save) { try { localStorage.setItem("density", mode); } catch (e) {} }
+    }
+    apply(root.dataset.density, false);
+    btns.forEach(function (b) { b.addEventListener("click", function () { apply(b.dataset.d, true); }); });
+  })();
+</script>
 <script src="links.js"></script><script src="app.js"></script>
 </body></html>
