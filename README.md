@@ -32,7 +32,7 @@ Homepage is a small, fast, personal hub that gathers every game and creation in 
 - 💾 **Remembers you:** your theme and layout are saved in your browser and applied before the page paints, so there is no flash on reload.
 - 📱 **Responsive:** works on desktop, tablet, and phone.
 - 🖼️ **Card art:** each card gets a colored header, or a custom image when one is set.
-- 🔐 **Sign-in screen:** a lightweight password gate on load (see the [note](#-a-note-on-the-sign-in-screen)).
+- 🔗 **Github Repo:** a link in the footer points back to this repository.
 
 ## 🎨 Themes
 

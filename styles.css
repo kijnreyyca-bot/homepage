@@ -41,7 +41,6 @@
 [data-theme="void"] .card-art:not(.has-image):before,[data-theme="void"] .card-art:not(.has-image):after{display:none}
 [data-theme="void"] .search-wrap,[data-theme="void"] .note,[data-theme="void"] .tab.active,[data-theme="void"] .tab:hover,[data-theme="void"] .empty-orb{background:#00000000}
 [data-theme="void"] .tab.active{border-color:rgba(255,255,255,.35)}
-[data-theme="void"] .auth-box input{background:#00000000}
 
 /* 3. White: light grey with black text */
 [data-theme="white"]{
@@ -53,7 +52,6 @@
   --ambient:.10}
 [data-theme="white"] .card{box-shadow:0 1px 3px rgba(0,0,0,.06)}
 [data-theme="white"] .card:hover{box-shadow:0 8px 24px rgba(0,0,0,.10)}
-[data-theme="white"] .auth-box{box-shadow:0 24px 80px rgba(0,0,0,.18)}
 
 /* 4. Dark Blue */
 [data-theme="blue"]{
@@ -67,7 +65,8 @@
 
 /* Theme picker */
 .theme-picker{position:relative}
-.theme-btn{display:inline-flex;align-items:center;gap:7px}
+.theme-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 14px;border:1px solid var(--line);border-radius:999px;color:var(--ink);background:transparent;font:500 12px var(--font);cursor:pointer;transition:background .2s,border-color .2s}
+.theme-btn:hover{background:var(--glass);border-color:rgba(var(--fx),.25)}
 .theme-menu{position:absolute;right:0;top:calc(100% + 8px);min-width:176px;padding:6px;display:flex;flex-direction:column;gap:2px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,.35);z-index:50}
 .theme-menu[hidden]{display:none}
 .theme-opt{display:flex;align-items:center;gap:10px;width:100%;padding:8px 10px;border:0;border-radius:8px;background:transparent;color:var(--ink);font:500 12px var(--font);text-align:left;cursor:pointer}
@@ -133,3 +132,9 @@ html[data-density="comfy"] .card-art{height:100px;padding:13px}
 html[data-density="comfy"] .card-content{padding:12px}
 html[data-density="comfy"] .art-glyph{right:14px;font-size:27px}
 }
+
+/* ===================== FOOTER LINKS ===================== */
+.footer-meta{display:flex;align-items:center;gap:12px}
+.footer-repo{color:var(--ink-2);font-size:10px;font-weight:500;transition:color .2s}
+.footer-repo:hover{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+@media(max-width:740px){.footer-meta{gap:9px}}
