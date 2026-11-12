@@ -71,7 +71,7 @@ On phones, both modes show 2 cards per row.
 | `fonts/` | Self-hosted DM Sans (`woff2`, variable weight). |
 | `404.html` | Themed not-found page. |
 | `manifest.webmanifest` | Installable app metadata and icons. |
-| `robots.txt` | Crawler rules; points at the sitemap. |
+| `robots.txt` | Crawler rules: allows search, blocks AI crawlers, points at the sitemap. |
 | `xml/sitemap.xml` | Search engine sitemap. |
 
 ## 🚀 Run it locally
