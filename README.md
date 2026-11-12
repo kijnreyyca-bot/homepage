@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="favicon.png" alt="Homepage logo" height="128">
+<img src="png/favicon.png" alt="Homepage logo" height="128">
 
 # Homepage.
 
@@ -67,10 +67,12 @@ On phones, both modes show 2 cards per row.
 | `app.js` | Theme/density switching, search, tabs and card rendering. |
 | `links.js` | The link catalogue — edit this to add or change sites. |
 | `images/` | Local WebP card art. |
+| `png/` | Favicon, app icons, Apple touch icon and social preview card. |
 | `fonts/` | Self-hosted DM Sans (`woff2`, variable weight). |
 | `404.html` | Themed not-found page. |
 | `manifest.webmanifest` | Installable app metadata and icons. |
-| `robots.txt`, `sitemap.xml` | Search engine plumbing. |
+| `robots.txt` | Crawler rules; points at the sitemap. |
+| `xml/sitemap.xml` | Search engine sitemap. |
 
 ## 🚀 Run it locally
 
