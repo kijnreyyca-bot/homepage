@@ -5,6 +5,7 @@
   // The theme background lives in CSS (--bg) per theme, so read it instead of
   // keeping a duplicate colour table in JS.
   const THEMES = ['void', 'dark', 'white', 'blue'];
+  const THEME_LABELS = { void: 'The Void', dark: 'Dark', white: 'White', blue: 'Dark Blue' };
   const themeBtn = document.querySelector('#theme-btn');
   const themeMenu = document.querySelector('#theme-menu');
   const themeMeta = document.querySelector('#theme-color');
@@ -19,7 +20,12 @@
     if (!THEMES.includes(name)) name = 'dark';
     root.dataset.theme = name;
     if (themeMeta) themeMeta.setAttribute('content', themeColor());
-    themeOpts.forEach(opt => opt.setAttribute('aria-checked', String(opt.dataset.t === name)));
+    themeOpts.forEach(opt => {
+      const active = opt.dataset.t === name;
+      opt.setAttribute('aria-checked', String(active));
+      opt.setAttribute('tabindex', active ? '0' : '-1');
+    });
+    if (themeBtn) themeBtn.setAttribute('aria-label', `Theme: ${THEME_LABELS[name]}`);
     if (save) { try { localStorage.setItem('theme', name); } catch {} }
   }
 
@@ -29,12 +35,27 @@
     themeBtn.setAttribute('aria-expanded', String(open));
   }
 
+  function focusOption(index) {
+    const opt = themeOpts[index];
+    if (!opt) return;
+    themeOpts.forEach((item, i) => item.setAttribute('tabindex', i === index ? '0' : '-1'));
+    opt.focus();
+  }
+
+  function openThemeMenu() {
+    if (!themeBtn || !themeMenu) return;
+    toggleThemeMenu(true);
+    const checked = themeOpts.findIndex(opt => opt.dataset.t === root.dataset.theme);
+    focusOption(checked < 0 ? 0 : checked);
+  }
+
   applyTheme(root.dataset.theme, false);
 
   if (themeBtn && themeMenu) {
     themeBtn.addEventListener('click', event => {
       event.stopPropagation();
-      toggleThemeMenu(themeMenu.hidden);
+      if (themeMenu.hidden) openThemeMenu();
+      else toggleThemeMenu(false);
     });
     themeOpts.forEach(opt => {
       opt.addEventListener('click', () => {
@@ -42,6 +63,24 @@
         toggleThemeMenu(false);
         themeBtn.focus();
       });
+    });
+    themeMenu.addEventListener('keydown', event => {
+      const current = themeOpts.indexOf(document.activeElement);
+      if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        focusOption((current + 1) % themeOpts.length);
+      } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+        event.preventDefault();
+        focusOption((current - 1 + themeOpts.length) % themeOpts.length);
+      } else if (event.key === 'Home') {
+        event.preventDefault();
+        focusOption(0);
+      } else if (event.key === 'End') {
+        event.preventDefault();
+        focusOption(themeOpts.length - 1);
+      } else if (event.key === 'Tab') {
+        toggleThemeMenu(false);
+      }
     });
     document.addEventListener('click', event => {
       if (!themeMenu.hidden && !themeMenu.contains(event.target) && !themeBtn.contains(event.target)) toggleThemeMenu(false);
@@ -87,12 +126,14 @@
   document.querySelector('#link-count').textContent = String(items.length).padStart(2, '0');
   document.querySelector('#category-count').textContent = String(categories.length - 1).padStart(2, '0');
   document.querySelector('.footer-year').textContent = `© ${new Date().getFullYear()}`;
+
   function drawTabs() {
     tabsEl.innerHTML = categories.map(category => {
       const count = category === 'All' ? items.length : items.filter(item => item.category === category).length;
       return `<button class="tab${activeCategory === category ? ' active' : ''}" type="button" data-category="${esc(category)}" aria-pressed="${activeCategory === category}">${esc(category)}<span class="tab-count">${count}</span></button>`;
     }).join('');
   }
+
   function render() {
     const query = searchEl.value.trim().toLowerCase();
     const filtered = items.filter(item => {
@@ -106,13 +147,15 @@
       const url = safeURL(item.url);
       const image = item.image ? safeURL(item.image) : null;
       const tags = (Array.isArray(item.tags) ? item.tags : []).slice(0, 4).map(tag => `<span class="tag">${esc(tag)}</span>`).join('');
-      const imageMarkup = image ? `<img class="card-image" src="${esc(image.href)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '';
-      return `<a class="card" href="${esc(url.href)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${esc(item.title)} in a new tab"><div class="card-art${image ? ' has-image' : ''}" style="--art:${esc(item.color || '#30394b')};--glow:${esc(item.glow || 'rgba(255,255,255,.3)')}">${imageMarkup}<span class="art-index">${String(index + 1).padStart(2, '0')} / ${String(filtered.length).padStart(2, '0')}</span><span class="art-glyph" aria-hidden="true">${esc(item.glyph || '✳')}</span></div><div class="card-content"><div class="card-top"><span class="domain">${esc(domainOf(url.href))}</span><span class="external" aria-hidden="true">↗</span></div><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p><div class="tags">${tags}</div></div></a>`;
+      const loading = index === 0 ? 'loading="eager" fetchpriority="high"' : index < 4 ? 'loading="eager"' : 'loading="lazy"';
+      const imageMarkup = image ? `<img class="card-image" src="${esc(image.href)}" alt="" ${loading} decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">` : '';
+      return `<article class="card"><div class="card-art${image ? ' has-image' : ''}" style="--art:${esc(item.color || '#30394b')};--glow:${esc(item.glow || 'rgba(255,255,255,.3)')}">${imageMarkup}<span class="art-index" aria-hidden="true">${String(index + 1).padStart(2, '0')} / ${String(filtered.length).padStart(2, '0')}</span><span class="art-glyph" aria-hidden="true">${esc(item.glyph || '✳')}</span></div><div class="card-content"><div class="card-top"><span class="domain" aria-hidden="true">${esc(domainOf(url.href))}</span><span class="external" aria-hidden="true">↗</span></div><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p><div class="tags" aria-hidden="true">${tags}</div></div><a class="card-link" href="${esc(url.href)}" target="_blank" rel="noopener noreferrer"><span class="sr-only">Open ${esc(item.title)} in a new tab</span></a></article>`;
     }).join('');
     emptyEl.hidden = filtered.length > 0;
     document.querySelector('#result-count').textContent = `${String(filtered.length).padStart(2, '0')} ${filtered.length === 1 ? 'LINK' : 'LINKS'}`;
     document.querySelector('#active-label').textContent = `${activeCategory === 'All' ? 'EVERYTHING, IN ONE PLACE' : activeCategory.toUpperCase()}`;
   }
+
   tabsEl.addEventListener('click', event => {
     const button = event.target.closest('[data-category]');
     if (!button) return;

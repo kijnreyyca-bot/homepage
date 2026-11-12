@@ -2,10 +2,10 @@ window.LINKS = [
   {
     title: "Eaglercraft Version Launcher",
     url: "https://kijnreyyca-bot.github.io/eaglerMC/",
-    description: "Eaglercraft Version Launcher",
+    description: "Launch Eaglercraft 1.12.2, 26.2, or The Broken Script in your browser.",
     category: "Gaming",
-    tags: ["gaming", "entertainment"],
-    image: "https://i.pinimg.com/736x/9b/ea/49/9bea4925478af8c34f659075e6cb2f5d.jpg",
+    tags: ["gaming", "entertainment", "minecraft"],
+    image: "images/eaglercraft.webp",
     color: "#31395e",
     glow: "rgba(150,165,255,.6)",
     glyph: "✳"
@@ -13,10 +13,10 @@ window.LINKS = [
   {
     title: "Pinterest Redirect Hub",
     url: "https://kijnreyyca-bot.github.io/redirect_site/",
-    description: "Pinterest Redirect Hub",
+    description: "Jump to Pinterest's European storefronts with quick shortcut codes.",
     category: "Tools",
-    tags: ["pinterest", "redirect"],
-    image: "https://i.pinimg.com/736x/e2/f5/ac/e2f5acb98e15bd7ca37e1fad71cb2dc7.jpg",
+    tags: ["pinterest", "redirect", "shortcuts"],
+    image: "images/pinterest.webp",
     color: "#31395e",
     glow: "rgba(150,165,255,.6)",
     glyph: "↗"
@@ -24,21 +24,21 @@ window.LINKS = [
   {
     title: "Frame - MP4 Player",
     url: "https://kijnreyyca-bot.github.io/Frame/",
-    description: "Media Entertainment Video Site",
+    description: "A clean in-browser MP4 player for your own video files.",
     category: "Entertainment",
-    tags: ["media", "favorite"],
-    image: "https://i.pinimg.com/736x/d3/4c/66/d34c6638522a36205e0acbc6cabeb778.jpg",
+    tags: ["media", "favorite", "video"],
+    image: "images/frame.webp",
     color: "#31395e",
     glow: "rgba(150,165,255,.6)",
     glyph: "✦"
   },
-    {
+  {
     title: "Idle-Game Clickers",
     url: "https://kijnreyyca-bot.github.io/Clickers/",
-    description: "Idle-Game Clicker Selector",
+    description: "Spacebar Clicker and Cookie Clicker 2.052, ready to play.",
     category: "Entertainment",
-  tags: ["gaming", "entertainment"],
-    image: "https://i.pinimg.com/736x/71/b7/2c/71b72c2635f4985074f70b6bca6b9bad.jpg",
+    tags: ["gaming", "entertainment", "idle"],
+    image: "images/clickers.webp",
     color: "#31395e",
     glow: "rgba(150,165,255,.6)",
     glyph: "✦"

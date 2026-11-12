@@ -3,14 +3,31 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" id="theme-color" content="#1a1a1d">
-<script>try{var t=localStorage.getItem("theme");if(/^(void|dark|white|blue)$/.test(t))document.documentElement.dataset.theme=t;var d=localStorage.getItem("density");if(d==="compact"||d==="comfy")document.documentElement.dataset.density=d}catch(e){}</script><meta name="description" content="A personal collection of useful places on the web.">
-<title>Homepage</title>
+<script>try{var t=localStorage.getItem("theme");if(/^(void|dark|white|blue)$/.test(t))document.documentElement.dataset.theme=t;var d=localStorage.getItem("density");if(d==="compact"||d==="comfy")document.documentElement.dataset.density=d}catch(e){}</script><meta name="description" content="A personal collection of games and creations by kijnreyyca.">
+<link rel="canonical" href="https://kijnreyyca-bot.github.io/homepage/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Homepage">
+<meta property="og:title" content="Homepage — Good things, worth sharing.">
+<meta property="og:description" content="A personal collection of games and creations by kijnreyyca.">
+<meta property="og:url" content="https://kijnreyyca-bot.github.io/homepage/">
+<meta property="og:image" content="https://kijnreyyca-bot.github.io/homepage/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Homepage — Good things, worth sharing.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Homepage — Good things, worth sharing.">
+<meta name="twitter:description" content="A personal collection of games and creations by kijnreyyca.">
+<meta name="twitter:image" content="https://kijnreyyca-bot.github.io/homepage/og-image.png">
+<title>Homepage — Good things, worth sharing.</title>
 <!-- Browser Tab Icon (Favicon) --><link rel="icon" type="image/png" href="favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" href="fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<a class="skip-link" href="#main">Skip to content</a>
 
 <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
 <header class="topbar"><a class="brand" href="#" aria-label="Homepage"><span class="brand-mark"><img src="favicon.png" alt=""></span><span>Homepage<span class="brand-dot">.</span></span></a><div class="top-right"><span class="online"><i></i> A little corner of the internet</span><a class="share-link" href="#collections">Explore <span>↗</span></a><div class="theme-picker"><button class="theme-btn" id="theme-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="theme-menu"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg><span class="theme-label">Theme</span></button>
@@ -20,13 +37,13 @@
 <button class="theme-opt" role="menuitemradio" data-t="white" aria-checked="false"><span class="swatch sw-white"></span>White<span class="check">✓</span></button>
 <button class="theme-opt" role="menuitemradio" data-t="blue" aria-checked="false"><span class="swatch sw-blue"></span>Dark Blue<span class="check">✓</span></button>
 </div></div></div></header>
-<main>
+<main id="main">
 <section class="hero"><div class="eyebrow"><span class="eyebrow-line"></span> A personal collection <span class="eyebrow-line"></span></div><h1>Good things,<br><span>worth sharing.</span></h1><p class="intro">A collection of games.</p><a class="scroll-cue" href="#collections"><span class="scroll-icon">↓</span> Take a look around</a>
 <div class="stats"><div><strong id="link-count">00</strong><span>curated links</span></div><div class="stat-rule"></div><div><strong id="category-count">00</strong><span>collections</span></div></div></section>
 <section class="collection-section" id="collections"><div class="section-heading"><div><div class="section-kicker">My collection</div><h2>Places to <span>explore</span></h2></div><div class="search-wrap"><span class="search-icon">⌕</span><input type="search" id="search" placeholder="Find something…" aria-label="Search links"><kbd>/</kbd></div></div>
-<nav class="tabs" id="tabs" aria-label="Link categories"></nav><div class="filter-row"><div id="active-label">Everything in one place</div><div class="density" role="radiogroup" aria-label="Card density"><button type="button" role="radio" data-d="compact" aria-checked="true">Compact</button><button type="button" role="radio" data-d="comfy" aria-checked="false">Comfy</button></div><div class="filter-count" id="result-count"></div></div><div class="card-grid" id="card-grid"></div><div class="empty-state" id="empty-state" hidden><div class="empty-orb">⌕</div><h3>Nothing in this little corner</h3><p>Try another search or collection.</p></div></section>
+<nav class="tabs" id="tabs" aria-label="Link categories"></nav><div class="filter-row"><div id="active-label">Everything in one place</div><div class="density" role="radiogroup" aria-label="Card density"><button type="button" role="radio" data-d="compact" aria-checked="true">Compact</button><button type="button" role="radio" data-d="comfy" aria-checked="false">Comfy</button></div><div class="filter-count" id="result-count" role="status" aria-live="polite" aria-atomic="true"></div></div><div class="card-grid" id="card-grid"></div><div class="empty-state" id="empty-state" hidden><div class="empty-orb">⌕</div><h3>Nothing in this little corner</h3><p>Try another search or collection.</p></div></section>
 <section class="note"><span class="note-spark">✳</span><div><strong>Always open to new finds.</strong><p>A growing list of websites, games, and directory sites.</p></div><a href="#collections" aria-label="Back to the collections">↑</a></section>
-</main><footer><a class="brand footer-brand" href="#"><span class="brand-mark"><img src="favicon.png" alt=""></span><span>Homepage<span class="brand-dot">.</span></span></a><span>Made for the things worth keeping.</span><div class="footer-meta"><span class="footer-year"></span><a class="footer-repo" href="https://github.com/kijnreyyca-bot/homepage" target="_blank" rel="noopener">Github Repo</a></div></footer>
+</main><footer><a class="brand footer-brand" href="#"><span class="brand-mark"><img src="favicon.png" alt=""></span><span>Homepage<span class="brand-dot">.</span></span></a><span>Made for the things worth keeping.</span><div class="footer-meta"><span class="footer-year"></span><a class="footer-repo" href="https://github.com/kijnreyyca-bot/homepage" target="_blank" rel="noopener noreferrer">Github Repo<span class="sr-only"> (opens in a new tab)</span></a></div></footer>
 
 <script src="links.js"></script><script src="app.js"></script>
 </body></html>

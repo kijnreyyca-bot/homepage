@@ -6,13 +6,21 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'DM Sans';
+  src: url('fonts/dm-sans.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Edit links.js to replace the sample URLs and descriptions. */
 :root{
   color-scheme:dark;
   --fx:255,255,255;            /* overlay channel: white on dark themes, black on light */
   --ac:194,242,139;            /* accent channels */
   --bg:#1a1a1d;--panel:#242427;--overlay:rgba(5,8,12,.88);
-  --ink:#f5f5f5;--ink-2:#c9c9ce;--muted:#a0a0a8;--faint:#76767e;
+  --ink:#f5f5f5;--ink-2:#c9c9ce;--muted:#a0a0a8;--faint:#909099;
   --accent:#c2f28b;--on-accent:#172015;--danger:#ff8888;
   --card:linear-gradient(145deg,rgba(var(--fx),.075),rgba(var(--fx),.023));
   --card-hover:linear-gradient(145deg,rgba(var(--fx),.095),rgba(var(--fx),.035));
@@ -46,7 +54,7 @@
 [data-theme="white"]{
   color-scheme:light;--fx:0,0,0;--ac:47,122,20;
   --bg:#eceef1;--panel:#fff;--overlay:rgba(236,238,241,.88);
-  --ink:#14161a;--ink-2:#373c46;--muted:#5b6270;--faint:#7b8290;
+  --ink:#14161a;--ink-2:#373c46;--muted:#5b6270;--faint:#616a78;
   --accent:#2f7a14;--on-accent:#fff;--danger:#c62828;
   --card:linear-gradient(145deg,#fff,#f6f7f9);--card-hover:linear-gradient(145deg,#fff,#fff);
   --ambient:.10}
@@ -57,7 +65,7 @@
 [data-theme="blue"]{
   color-scheme:dark;--fx:140,185,255;--ac:108,182,255;
   --bg:#0a1628;--panel:#0f2140;--overlay:rgba(4,10,20,.88);
-  --ink:#f2f6ff;--ink-2:#c4d1ec;--muted:#8fa4c8;--faint:#5f7399;
+  --ink:#f2f6ff;--ink-2:#c4d1ec;--muted:#8fa4c8;--faint:#8296bb;
   --accent:#6cb6ff;--on-accent:#04182e;--danger:#ff8888;
   --card:linear-gradient(145deg,rgba(120,170,255,.10),rgba(120,170,255,.035));
   --card-hover:linear-gradient(145deg,rgba(120,170,255,.14),rgba(120,170,255,.05));
@@ -170,11 +178,62 @@ summary:focus-visible,
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(var(--ac), .18);
 }
-/* Cards are links: lift the ring off the rounded border so it stays visible. */
-.card:focus-visible {
+/* Cards are articles with a stretched link so the name stays short and clear. */
+.card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+}
+.card:focus-within {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-color: transparent;
 }
+.card-link:focus-visible { outline: none; }
+.card-content { pointer-events: none; }
 /* Menu items sit inside a panel with only 6px of padding. */
 .theme-opt:focus-visible { outline-offset: -2px; }
+
+/* ===================== UTILITIES ===================== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 9999;
+  padding: 10px 16px;
+  border-radius: 9px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font: 700 12px var(--font);
+  transform: translateY(-250%);
+  transition: transform .18s ease;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: none;
+  outline: 2px solid var(--on-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
