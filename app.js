@@ -1,4 +1,79 @@
 (() => {
+  const root = document.documentElement;
+
+  /* ---------------- Theme switcher ---------------- */
+  // The theme background lives in CSS (--bg) per theme, so read it instead of
+  // keeping a duplicate colour table in JS.
+  const THEMES = ['void', 'dark', 'white', 'blue'];
+  const themeBtn = document.querySelector('#theme-btn');
+  const themeMenu = document.querySelector('#theme-menu');
+  const themeMeta = document.querySelector('#theme-color');
+  const themeOpts = themeMenu ? Array.from(themeMenu.querySelectorAll('.theme-opt')) : [];
+
+  function themeColor() {
+    const bg = getComputedStyle(root).getPropertyValue('--bg').trim();
+    return bg || '#1a1a1d';
+  }
+
+  function applyTheme(name, save) {
+    if (!THEMES.includes(name)) name = 'dark';
+    root.dataset.theme = name;
+    if (themeMeta) themeMeta.setAttribute('content', themeColor());
+    themeOpts.forEach(opt => opt.setAttribute('aria-checked', String(opt.dataset.t === name)));
+    if (save) { try { localStorage.setItem('theme', name); } catch {} }
+  }
+
+  function toggleThemeMenu(open) {
+    if (!themeBtn || !themeMenu) return;
+    themeMenu.hidden = !open;
+    themeBtn.setAttribute('aria-expanded', String(open));
+  }
+
+  applyTheme(root.dataset.theme, false);
+
+  if (themeBtn && themeMenu) {
+    themeBtn.addEventListener('click', event => {
+      event.stopPropagation();
+      toggleThemeMenu(themeMenu.hidden);
+    });
+    themeOpts.forEach(opt => {
+      opt.addEventListener('click', () => {
+        applyTheme(opt.dataset.t, true);
+        toggleThemeMenu(false);
+        themeBtn.focus();
+      });
+    });
+    document.addEventListener('click', event => {
+      if (!themeMenu.hidden && !themeMenu.contains(event.target) && !themeBtn.contains(event.target)) toggleThemeMenu(false);
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && !themeMenu.hidden) {
+        toggleThemeMenu(false);
+        themeBtn.focus();
+      }
+    });
+  }
+
+  /* ---------------- Density switcher ---------------- */
+  const densityBtns = Array.from(document.querySelectorAll('.density button'));
+
+  function applyDensity(mode, save) {
+    if (mode !== 'comfy') mode = 'compact';
+    root.dataset.density = mode;
+    densityBtns.forEach(btn => btn.setAttribute('aria-checked', String(btn.dataset.d === mode)));
+    if (save) { try { localStorage.setItem('density', mode); } catch {} }
+  }
+
+  applyDensity(root.dataset.density, false);
+  densityBtns.forEach(btn => btn.addEventListener('click', () => applyDensity(btn.dataset.d, true)));
+
+  // Live-sync when another tab or site on this origin changes theme or density.
+  window.addEventListener('storage', event => {
+    if (event.key === 'theme') applyTheme(event.newValue, false);
+    if (event.key === 'density') applyDensity(event.newValue, false);
+  });
+
+  /* ---------------- Link collection ---------------- */
   const items = Array.isArray(window.LINKS) ? window.LINKS : [];
   const grid = document.querySelector('#card-grid');
   const tabsEl = document.querySelector('#tabs');
