@@ -42,5 +42,16 @@ window.LINKS = [
     color: "#31395e",
     glow: "rgba(150,165,255,.6)",
     glyph: "✦"
+  },
+   {
+    title: "Windows Emulator",
+    url: "https://kijnreyyca-bot.github.io/WINemulator/",
+    description: "A emulator for certain windows versions, ranging from 2000 to 9, with CMD prompt and others.",
+    category: "Gaming",
+    tags: ["gaming", "entertainment", "emulation"],
+    image: "",
+    color: "#31395e",
+    glow: "rgba(150,165,255,.6)",
+    glyph: "✦"
   }
 ];
