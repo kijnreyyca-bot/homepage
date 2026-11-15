@@ -49,7 +49,7 @@ window.LINKS = [
     description: "An emulator for several Windows versions, from Windows 98 to Windows 9, with a CMD prompt and more.",
     category: "Tools",
     tags: ["emulation", "windows", "retro"],
-    image: "",
+    image: "images/windows.webp",
     color: "#31395e",
     glow: "rgba(150,165,255,.6)",
     glyph: "✦"
